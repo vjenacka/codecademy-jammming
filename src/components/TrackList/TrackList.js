@@ -4,12 +4,12 @@ import Track from "../Track/Track";
 
 export class TrackList extends Component {
   render() {
-    const { searchResults } = this.props;
-    console.log(searchResults);
+    const { trackList, onAdd } = this.props;
+    console.log(trackList);
     return (
       <div className="TrackList">
-        {searchResults.map(result => (
-          <Track key={result.id} track={result} />
+        {trackList.map(result => (
+          <Track key={result.id} track={result} onAdd={onAdd} />
         ))}
       </div>
     );
