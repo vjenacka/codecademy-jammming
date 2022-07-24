@@ -5,9 +5,13 @@ export class Track extends Component {
   constructor(props) {
     super(props);
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
   }
   addTrack() {
     this.props.onAdd(this.props.track);
+  }
+  removeTrack() {
+    this.props.onRemove(this.props.track);
   }
   render() {
     const { track } = this.props;
@@ -20,7 +24,15 @@ export class Track extends Component {
           </p>
         </div>
         <button className="Track-action">
-          <a className="track-action">+</a>
+          {this.props.isRemoval ? (
+            <a className="track-action" onClick={this.removeTrack}>
+              -
+            </a>
+          ) : (
+            <a className="track-action" onClick={this.addTrack}>
+              +
+            </a>
+          )}
         </button>
       </div>
     );

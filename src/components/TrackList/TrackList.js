@@ -4,12 +4,18 @@ import Track from "../Track/Track";
 
 export class TrackList extends Component {
   render() {
-    const { trackList, onAdd } = this.props;
-    console.log(trackList);
+    const { trackList, onAdd, onRemove, isRemoval } = this.props;
+
     return (
       <div className="TrackList">
         {trackList.map(result => (
-          <Track key={result.id} track={result} onAdd={onAdd} />
+          <Track
+            key={result.id}
+            track={result}
+            onAdd={onAdd}
+            onRemove={onRemove}
+            isRemoval={isRemoval}
+          />
         ))}
       </div>
     );
