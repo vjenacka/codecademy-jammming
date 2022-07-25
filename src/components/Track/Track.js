@@ -25,13 +25,13 @@ export class Track extends Component {
         </div>
         <button className="Track-action">
           {this.props.isRemoval ? (
-            <a className="track-action" onClick={this.removeTrack}>
+            <span className="track-action" onClick={this.removeTrack}>
               -
-            </a>
+            </span>
           ) : (
-            <a className="track-action" onClick={this.addTrack}>
+            <span className="track-action" onClick={this.addTrack}>
               +
-            </a>
+            </span>
           )}
         </button>
       </div>
