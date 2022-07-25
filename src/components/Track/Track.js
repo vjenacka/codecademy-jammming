@@ -20,7 +20,7 @@ export class Track extends Component {
         <div className="Track-information">
           <h3>{track.name}</h3>
           <p>
-            {track.artist} | {track.album}
+            Artist: {track.artist} | Album: {track.album}
           </p>
         </div>
         <button className="Track-action">
