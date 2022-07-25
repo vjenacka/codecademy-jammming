@@ -19,10 +19,7 @@ export class SearchBar extends Component {
   render() {
     return (
       <div className="SearchBar">
-        <input
-          placeholder="Enter A Song, Album, or Artist"
-          onChange={this.handleTermChange}
-        />
+        <input value={this.state.term} onChange={this.handleTermChange} />
         <button
           className="SearchButton"
           onClick={e => {

@@ -30,9 +30,11 @@ export class App extends Component {
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.search = this.search.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
   }
   componentDidMount() {
     Spotify.getAccessToken();
+    Spotify.savePlaylist(this.state.playlistName);
   }
   //add new track to playlist
   addTrack(track) {
@@ -62,6 +64,10 @@ export class App extends Component {
       this.setState({ searchResults: res });
     });
   }
+  //save playlist to user account
+  savePlaylist() {
+    //nesto
+  }
   render() {
     return (
       <div>
@@ -82,6 +88,7 @@ export class App extends Component {
               playlistTracks={this.state.playlistTracks}
               onRemove={this.removeTrack}
               onNameChange={this.updatePlaylistName}
+              onSave={this.savePlaylist}
             />
           </div>
         </div>
