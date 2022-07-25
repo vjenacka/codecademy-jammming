@@ -43,24 +43,27 @@ const Spotify = {
         console.log(error);
       });
   },
-  async savePlaylist(playlistName /* , URIarr */) {
-    /* if (playlistName === "" && URIarr === []) return; */
+  async savePlaylist(playlistName, URIarr) {
+    if (playlistName === "" && URIarr === []) return;
 
     const currentToken = userAccessToken;
     const headers = { headers: { Authorization: `Bearer ${currentToken}` } };
     let userID;
+    let playlistID;
+    let snapshotID;
     //fetch user ID
     try {
-      const userIDjson = await fetch("https://api.spotify.com/v1/me", headers);
-      userID = await userIDjson.json();
+      const resData = await fetch("https://api.spotify.com/v1/me", headers);
+      const data = await resData.json();
+      userID = data.id;
     } catch (err) {
       console.log(err);
     }
 
-    //POST playlist
+    //gets the playlist ID
     try {
       const playlistIDjson = await fetch(
-        `https://api.spotify.com/v1/users/${userID.id}/playlists`,
+        `https://api.spotify.com/v1/users/${userID}/playlists`,
         {
           method: "POST",
           headers: {
@@ -70,12 +73,32 @@ const Spotify = {
           body: JSON.stringify({
             name: playlistName,
             description: "My playlist",
-            public: false,
           }),
         }
       );
-      const playlistID = await playlistIDjson.json();
-      console.log(playlistID);
+      const playlistIDdata = await playlistIDjson.json();
+      playlistID = playlistIDdata.id;
+    } catch (err) {
+      console.log(err);
+    }
+
+    //get the new playlist ID with updated URIs
+    try {
+      const data = await fetch(
+        `https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${currentToken}`,
+          },
+          body: JSON.stringify({
+            uris: URIarr,
+          }),
+        }
+      );
+      const resData = await data.json();
+      snapshotID = resData.snapshot_id;
     } catch (err) {
       console.log(err);
     }

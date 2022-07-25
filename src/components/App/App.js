@@ -10,21 +10,8 @@ export class App extends Component {
     super(props);
     this.state = {
       searchResults: null,
-      playlistName: "My playlist",
-      playlistTracks: [
-        {
-          name: "Hamina pjesma",
-          artist: "Hamo",
-          album: "Hamin album",
-          id: 1,
-        },
-        {
-          name: "Sabahetina pjesma",
-          artist: "Sabaheta",
-          album: "Sabahetin album",
-          id: 2,
-        },
-      ],
+      playlistName: "",
+      playlistTracks: [],
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -34,7 +21,6 @@ export class App extends Component {
   }
   componentDidMount() {
     Spotify.getAccessToken();
-    Spotify.savePlaylist(this.state.playlistName);
   }
   //add new track to playlist
   addTrack(track) {
@@ -66,7 +52,10 @@ export class App extends Component {
   }
   //save playlist to user account
   savePlaylist() {
-    //nesto
+    const uriArr = this.state.playlistTracks.map(track => track.URI);
+
+    Spotify.savePlaylist(this.state.playlistName, uriArr);
+    this.setState({ playlistName: "", playlistTracks: [] });
   }
   render() {
     return (
