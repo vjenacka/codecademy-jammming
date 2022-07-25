@@ -19,9 +19,9 @@ export class App extends Component {
     this.search = this.search.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
   }
-  /* componentDidMount() {
+  componentDidMount() {
     Spotify.getAccessToken();
-  } */
+  }
   //add new track to playlist
   addTrack(track) {
     //looks for existing track in the playlist, if found returns
