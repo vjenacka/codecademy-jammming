@@ -19,9 +19,9 @@ export class App extends Component {
     this.search = this.search.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
   }
-  componentDidMount() {
+  /* componentDidMount() {
     Spotify.getAccessToken();
-  }
+  } */
   //add new track to playlist
   addTrack(track) {
     //looks for existing track in the playlist, if found returns
@@ -72,13 +72,15 @@ export class App extends Component {
                 onAdd={this.addTrack}
               />
             )}
-            <Playlist
-              playlistName={this.state.playlistName}
-              playlistTracks={this.state.playlistTracks}
-              onRemove={this.removeTrack}
-              onNameChange={this.updatePlaylistName}
-              onSave={this.savePlaylist}
-            />
+            {this.state.playlistTracks.length !== 0 && (
+              <Playlist
+                playlistName={this.state.playlistName}
+                playlistTracks={this.state.playlistTracks}
+                onRemove={this.removeTrack}
+                onNameChange={this.updatePlaylistName}
+                onSave={this.savePlaylist}
+              />
+            )}
           </div>
         </div>
       </div>

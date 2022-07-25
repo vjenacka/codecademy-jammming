@@ -1,13 +1,13 @@
 let userAccessToken = "";
 const clientID = "83c122ad75084a728a71fe501e36dab2";
-const redirectURI = "http://localhost:3000/";
+const redirectURI = "https://my-jammming-codecademy.surge.sh/";
 
 const Spotify = {
   getAccessToken() {
     //gets a access token if none or if token is not in URL
     if (
       userAccessToken === "" &&
-      window.location.href === "http://localhost:3000/"
+      window.location.href === "https://my-jammming-codecademy.surge.sh/"
     ) {
       window.location = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURI}`;
     }
